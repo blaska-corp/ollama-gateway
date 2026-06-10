@@ -29,9 +29,27 @@ const OLLAMA_URL = process.env.OLLAMA_URL;
 // -------------------------
 app.post("/api/generate", async (req, res) => {
   try {
+    const payload = {
+      model: req.body.model,
+
+      prompt: req.body.prompt,
+      messages: req.body.messages,
+
+      // 🔥 FORÇADO PELO GATEWAY
+      temperature: 0.3,
+      top_p: 0.9,
+      top_k: 40,
+      repeat_penalty: 1.1,
+      num_ctx: 8192,
+
+      // 🧠 "NO THINKING" (via system prompt)
+      system:
+        "Responda de forma direta, sem raciocínio interno, sem explicações do processo, apenas resultado final."
+    };
+
     const response = await axios.post(
       `${OLLAMA_URL}/api/generate`,
-      req.body
+      payload
     );
 
     res.json(response.data);
