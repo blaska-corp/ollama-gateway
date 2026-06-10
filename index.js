@@ -41,10 +41,7 @@ app.post("/api/generate", async (req, res) => {
       top_k: 40,
       repeat_penalty: 1.1,
       num_ctx: 8192,
-
-      // 🧠 "NO THINKING" (via system prompt)
-      system:
-        "Responda de forma direta, sem raciocínio interno, sem explicações do processo, apenas resultado final."
+      "think": false
     };
 
     const response = await axios.post(
