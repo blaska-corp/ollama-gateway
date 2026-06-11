@@ -34,14 +34,14 @@ app.post("/api/generate", async (req, res) => {
 
       prompt: req.body.prompt,
       messages: req.body.messages,
-
+      format: "json",
       // 🔥 FORÇADO PELO GATEWAY
       temperature: 0.3,
       top_p: 0.9,
       top_k: 40,
       repeat_penalty: 1.1,
       num_ctx: 8192,
-      "think": false
+      think: false
     };
 
     const response = await axios.post(
