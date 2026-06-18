@@ -63,9 +63,14 @@ app.post("/api/generate", async (req, res) => {
 // -------------------------
 app.post("/api/embed", async (req, res) => {
   try {
+    const payload = {
+      model: req.body.model,
+      input: req.body.input ?? req.body.prompt
+    };
+
     const response = await axios.post(
       `${OLLAMA_URL}/api/embed`,
-      req.body
+      payload
     );
 
     res.json(response.data);
@@ -76,6 +81,7 @@ app.post("/api/embed", async (req, res) => {
     });
   }
 });
+
 
 // -------------------------
 app.listen(3000, () => {
